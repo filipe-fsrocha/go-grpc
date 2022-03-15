@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResponse {
+    string msg = 1;
+}
+
+message CreateUserRequest {
+    string username = 1;
+    string fullName = 2;
+    string email = 3;
+}
+
+message CreateUserResponse {
+    string username = 1;
+    string msg = 2;
+}
+
+message FibonacciRequest {
+    int32 n = 1;
+}
+
+message FibonacciReponse {
+    int32 result = 1;
+}
+
+message StreamDataRequest {
+    string msg = 1;
+}
+
+message StreamDataResponse {
+    string result = 1;
+}
+
+service TestGRPCService {
+    rpc Hello(HelloRequest) returns (HelloResponse){};
+
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse){};
+
+    rpc Fibonacci(FibonacciRequest) returns (stream FibonacciReponse) {}
+
+    rpc StreamRPC(stream StreamDataRequest) returns (stream StreamDataResponse){}; 
+
+    rpc RestTest(HelloRequest) returns (HelloResponse) {};
+}
